@@ -1,0 +1,19 @@
+{
+  "name": "initialize-local-dynamo",
+  "version": "1.0.0",
+  "repository": "blah",
+  "description": "Script to create docker image with a local version of dynamo pre-seeded with data for testing.",
+  "main": "index.js",
+  "keywords": [
+    "dynamo",
+    "local",
+    "initialization",
+    "docker"
+  ],
+  "author": "Andrew-Hagedorn",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.3.9",
+    "bluebird": "^3.3.5"
+  }
+}
