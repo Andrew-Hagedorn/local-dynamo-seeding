@@ -18,7 +18,7 @@ exports.table_params = {
     ProvisionedThroughput: {
         ReadCapacityUnits: 10,
         WriteCapacityUnits: 10
-    }
+    } 
 };
 
 exports.updates = [
