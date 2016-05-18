@@ -1,7 +1,25 @@
+sudo: false
 language: node_js
 node_js:
-  - 5
+- '4'
+notifications:
+    email: false
+branches:
+  only:
+    - master
+services:
+  - docker
+env:
+   global:
+     - DOCKER_CONTAINER=local-dynamo
+cache:
+  directories:
+    - node_modules
 before_script:
   - npm install
+  - npm prune
 script:
   - npm test
+  - sh ./deploy/init-dynamo.sh $DOCKER_CONTAINER
+  - sh ./deploy/seed-integration-test-data.sh
+  - npm run test:integration
