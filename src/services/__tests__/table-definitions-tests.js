@@ -78,7 +78,7 @@ describe('table-definitions', () => {
 
         return tableDefinitions()
             .then(() => {
-                expect(_dir).to.equal("./tables");
+                expect(_dir).to.equal("../tables");
                 done();
             })
 
