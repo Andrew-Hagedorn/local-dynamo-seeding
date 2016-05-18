@@ -15,7 +15,7 @@
   "scripts": {
     "build": "babel src --ignore=*/__tests__/* --out-dir=dist",
     "test": "mocha --compilers js:babel-register src/**/__tests__/**/*.js",
-    "test:integration": "mocha --compilers js:babel-register integration-tests/**/*.js"
+    "test:integration": "mocha --compilers js:babel-register integration-tests/*.js"
   },
   "dependencies": {
     "aws-sdk": "^2.3.11",
