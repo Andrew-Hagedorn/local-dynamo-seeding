@@ -8,6 +8,3 @@ docker build -t $IMAGE_NAME .
 
 ID=$(docker run -d -p 8000:8000 $IMAGE_NAME -sharedDb)
 echo $ID
-
-npm install
-node index.js
