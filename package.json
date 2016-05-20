@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "repository": "https://github.com/Andrew-Hagedorn/local-dynamo-seeding",
   "description": "Script to create docker image with a local version of dynamo pre-seeded with data for testing.",
-  "main": "./src/seed-dynamo.js",
+  "main": "./dist/seed-dynamo.js",
   "keywords": [
     "dynamo",
     "local",
