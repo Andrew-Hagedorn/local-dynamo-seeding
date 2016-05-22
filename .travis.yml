@@ -23,3 +23,9 @@ script:
   - sh ./deploy/init-dynamo.sh $DOCKER_CONTAINER
   - sh ./deploy/seed-integration-test-data.sh
   - npm run test:integration
+deploy:
+  provider: npm
+  email: $NPM_EMAIL
+  api_key: $NPM_AUTH_TOKEN
+  on:
+    branch: master
