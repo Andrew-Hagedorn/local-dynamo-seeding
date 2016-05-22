@@ -3,5 +3,4 @@ node_modules
 npm-debug.log
 integration-tests
 .travis.yml
-README.md
 deploy
