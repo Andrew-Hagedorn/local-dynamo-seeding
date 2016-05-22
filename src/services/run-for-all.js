@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 
 export default (definitions, action) => {
     return Promise.all(

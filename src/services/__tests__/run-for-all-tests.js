@@ -1,7 +1,6 @@
 'use strict';
 const chai = require('chai');
 const expect = chai.expect;
-const Promise = require('bluebird');
 import runForAllFunc from '../run-for-all';
 
 describe('run-for-all', () => {

@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 import { default as Db } from '../wrappers/db'
 import { default as runForAll } from './run-for-all'
 

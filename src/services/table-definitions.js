@@ -1,5 +1,4 @@
 const fs = require('fs');
-const Promise = require('bluebird');
 import { default as wrappedRequire } from '../wrappers/require';
 
 let parseTableDefinitions = (fileNames, directory, requireFunc) => {
