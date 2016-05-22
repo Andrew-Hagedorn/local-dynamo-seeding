@@ -2,4 +2,4 @@
 
 npm install
 npm run build
-node ./dist/runner.js
+node ./integration-tests/runner.js
