@@ -1,6 +1,6 @@
 {
   "name": "initialize-local-dynamo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": "https://github.com/Andrew-Hagedorn/local-dynamo-seeding",
   "description": "Script to create docker image with a local version of dynamo pre-seeded with data for testing.",
   "main": "./dist/index.js",
@@ -20,8 +20,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.3.11",
-    "babel-polyfill": "^6.8.0",
-    "exec": "^0.2.1"
+    "babel-polyfill": "^6.8.0"
   },
   "devDependencies": {
     "aws-sdk-mock": "^1.1.0",
