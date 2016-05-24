@@ -1,6 +1,6 @@
 {
   "name": "initialize-local-dynamo",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": "https://github.com/Andrew-Hagedorn/local-dynamo-seeding",
   "description": "Script to create docker image with a local version of dynamo pre-seeded with data for testing.",
   "main": "./dist/index.js",
@@ -16,6 +16,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && babel src --ignore=*/__tests__/* --out-dir=dist",
     "test": "mocha --compilers js:babel-register src/**/__tests__/**/*.js",
+    "prepublish": "npm run build",
     "test:integration": "mocha --compilers js:babel-register integration-tests/integration-tests.js"
   },
   "dependencies": {

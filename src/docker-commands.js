@@ -1,5 +1,5 @@
 const process = require('child_process');
-import { InitializationType } from './dynamo-initialization-type';
+import { InitializationType } from './initialization-type';
 
 let runCommand = (args) => {
     console.log("Running command: docker " + args.join(' '))
@@ -29,3 +29,11 @@ export function StartDynamo(initType) {
     });
 };
 
+export function SaveChanges(repository, tag) {
+
+    return runCommand(["ps", "-lq"])
+        .then(container => {
+           container = container.replace('\n', '');
+           return runCommand(["commit", container, repository + ":" + tag])
+        });
+}

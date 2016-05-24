@@ -16,12 +16,14 @@ cache:
   directories:
     - node_modules
 before_script:
-  - npm install
+  - npm install --ignore-scripts
   - npm prune
 script:
   - npm test
-  - sh ./deploy/seed-integration-test-data.sh
+  - npm run build
+  - node ./integration-tests/runner.js
   - npm run test:integration
+  - node ./integration-tests/saver.js
 deploy:
   provider: npm
   email: $NPM_EMAIL

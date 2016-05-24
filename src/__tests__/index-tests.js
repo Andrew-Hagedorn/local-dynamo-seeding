@@ -5,27 +5,33 @@ const assert = chai.assert;
 const globalSinon = require('sinon');
 
 const SeedDynamo = require('../seed-dynamo');
-const StartDynamo = require('../start-dynamo');
-const InitializationType = require('../dynamo-initialization-type').InitializationType;
+const commands = require('../docker-commands');
+const InitializationType = require('../initialization-type').InitializationType;
 
 describe('index exports', () => {
 
     let sinon;
     let _isSeedDynamo;
     let _isStartDynamo;
+    let _savedChanges;
 
 
     beforeEach(() => {
         _isSeedDynamo = false;
         _isStartDynamo = false;
+        _savedChanges = false;
         sinon = globalSinon.sandbox.create();
 
         sinon.stub(SeedDynamo, 'SeedDynamo', () => {
             _isSeedDynamo = true;
         });
 
-        sinon.stub(StartDynamo, 'StartDynamo', () => {
+        sinon.stub(commands, 'StartDynamo', () => {
             _isStartDynamo = true;
+        });
+
+        sinon.stub(commands, 'SaveChanges', () => {
+            _savedChanges = true;
         });
     });
 
@@ -43,6 +49,12 @@ describe('index exports', () => {
         getIndex().SeedDynamo();
 
         expect(_isSeedDynamo).to.equal(true);
+    });
+
+    it("exports SaveChanges", () => {
+        getIndex().SaveChanges();
+
+        expect(_savedChanges).to.equal(true);
     });
 
     it("exports InitializationType", () => {
