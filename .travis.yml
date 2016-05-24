@@ -20,7 +20,6 @@ before_script:
   - npm prune
 script:
   - npm test
-  - sh ./deploy/init-dynamo.sh $DOCKER_CONTAINER
   - sh ./deploy/seed-integration-test-data.sh
   - npm run test:integration
 deploy:
