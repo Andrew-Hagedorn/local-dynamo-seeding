@@ -164,7 +164,6 @@ describe('docker-commands', () => {
 
             push()
                 .then(() => {
-                    console.log(cmds)
                     expect(cmds[1]).to.equal("docker push fake-user/even-more-fake:the-tag")
                     done();
                 });
