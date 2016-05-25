@@ -14,12 +14,13 @@ describe('index exports', () => {
     let _isSeedDynamo;
     let _isStartDynamo;
     let _savedChanges;
-
+    let _pushed;
 
     beforeEach(() => {
         _isSeedDynamo = false;
         _isStartDynamo = false;
         _savedChanges = false;
+        _pushed = false;
         sinon = globalSinon.sandbox.create();
 
         sinon.stub(SeedDynamo, 'SeedDynamo', () => {
@@ -32,6 +33,10 @@ describe('index exports', () => {
 
         sinon.stub(commands, 'SaveChanges', () => {
             _savedChanges = true;
+        });
+
+        sinon.stub(commands, 'Push', () => {
+            _pushed = true;
         });
     });
 
@@ -55,6 +60,12 @@ describe('index exports', () => {
         getIndex().SaveChanges();
 
         expect(_savedChanges).to.equal(true);
+    });
+
+    it("exports SaveChanges", () => {
+        getIndex().Push();
+
+        expect(_pushed).to.equal(true);
     });
 
     it("exports InitializationType", () => {

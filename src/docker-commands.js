@@ -1,16 +1,22 @@
 const process = require('child_process');
 import { InitializationType } from './initialization-type';
+import logger from './services/logger';
 
-let runCommand = (args) => {
-    console.log("Running command: docker " + args.join(' '))
+let runCommand = (args, secure) => {
+    if(!secure) {
+        logger("Running command: docker " + args.join(' '));
+    }
+    else {
+        logger("Running docker command");
+    }
     return new Promise((resolve, reject) => {
         process.execFile("docker", args, (err, out) => {
             if (err) {
-                console.log(err);
+                logger(err);
                 reject(err);
             }
             else {
-                console.log(out);
+                logger(out);
                 resolve(out);
             }
         });
@@ -30,10 +36,15 @@ export function StartDynamo(initType) {
 };
 
 export function SaveChanges(repository, tag) {
-
+    
     return runCommand(["ps", "-lq"])
         .then(container => {
-           container = container.replace('\n', '');
-           return runCommand(["commit", container, repository + ":" + tag])
+            container = container.replace('\n', '');
+            return runCommand(["commit", container, repository + ":" + tag])
         });
-}
+};
+
+export function Push(username, password, repository, tag) {
+    return runCommand(["login", "-u", username, "-p", password], true)
+        .then(container => runCommand(["push", repository + ":" + tag]));
+};

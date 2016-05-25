@@ -3,21 +3,24 @@ const chai = require('chai');
 const expect = chai.expect;
 const assert = chai.assert;
 const globalSinon = require('sinon');
-import { StartDynamo, SaveChanges } from '../docker-commands';
+import { StartDynamo, SaveChanges, Push } from '../docker-commands';
 import { InitializationType } from '../initialization-type';
 const process = require('child_process');
+const logger = require('../services/logger')
 
 describe('docker-commands', () => {
 
     let givenError = () => { _error = { message: "error!" }};
     let sinon;
     let cmds;
+    let consoles;
     let _error;
 
     beforeEach(() => {
 
         _error = null;
         cmds = [];
+        consoles = [];
         sinon = globalSinon.sandbox.create();
 
         sinon.stub(process, 'execFile', (cmd, args, cb) => {
@@ -28,7 +31,9 @@ describe('docker-commands', () => {
             cb(_error, "");
         });
 
-        sinon.stub(console, 'log', () => { });
+        sinon.stub(logger, 'default', log => {
+            consoles.push(log);
+        });
     });
 
     afterEach(() => {
@@ -107,10 +112,63 @@ describe('docker-commands', () => {
 
             saveChanges()
                 .then(() => {
-                    console.log(cmds)
                     expect(cmds[1]).to.equal("docker commit  fake/even-more-fake:the-tag")
                     done();
                 });
         });
     });
+
+    describe("push", () => {
+
+        const repository = "fake-user/even-more-fake";
+        const tag = "the-tag";
+        const username = "fake-user";
+        const password = "fake-password";
+
+        let push = () => Push(username, password, repository, tag);
+
+        it("on error, rejects the promise", done => {
+
+            givenError();
+
+            push()
+                .then(() => {
+                    assert.fail("Error should have broken this.");
+                    done();
+                })
+                .catch(err => {
+                    expect(err).to.equal(_error);
+                    done();
+                });
+        });
+
+        it("logs into docker", done => {
+
+            push()
+                .then(() => {
+                    expect(cmds[0]).to.equal("docker login -u fake-user -p fake-password")
+                    done();
+                });
+        });
+
+        it("does not log password to console", done => {
+
+            push()
+                .then(() => {
+                    expect(consoles[0]).to.equal("Running docker command")
+                    done();
+                });
+        });
+
+        it("pushes the container to the repo", done => {
+
+            push()
+                .then(() => {
+                    console.log(cmds)
+                    expect(cmds[1]).to.equal("docker push fake-user/even-more-fake:the-tag")
+                    done();
+                });
+        });
+    });
+
 });
