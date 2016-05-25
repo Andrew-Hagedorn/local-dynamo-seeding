@@ -6,7 +6,8 @@ var password = process.env.DOCKER_PASSWORD;
 var repository = "chagedorn/initialize-local-dynamo";
 var tag = "test";
 
-index.SaveChanges(repository, tag).then(function() {
+index.SaveChanges(repository, tag)
+.then(function() {
     return index.Push(username, password, repository, tag)
 })
 .catch(function(err) {
