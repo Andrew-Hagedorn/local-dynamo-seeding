@@ -86,7 +86,7 @@ describe("integration-tests", () => {
     };
 
     let getEndpoint = () => {
-        return new aws.Endpoint('http://localhost:8000');
+        return new aws.Endpoint('http://localhost:443');
     };
 
     let initConfig = () => {

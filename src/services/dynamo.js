@@ -3,9 +3,12 @@ import { default as runForAll } from './run-for-all'
 
 export default class DynamoDb {
 
-    createTable(definition) {
+    constructor(port) {
+        this.port = port;
+    }
 
-        let db = new Db();
+    createTable(definition) {
+        let db = new Db(this.port);
         return new Promise((resolve, reject) => {
             db.createTable(definition.table_params, err => {
                 if (err) {
@@ -21,7 +24,7 @@ export default class DynamoDb {
         
         let putItem = (update) => {
 
-            let db = new Db();
+            let db = new Db(this.port);
             return new Promise((resolve, reject) => {
                 db.put(update, (err) => {
                     if (err) {

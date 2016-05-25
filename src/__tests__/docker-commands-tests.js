@@ -15,7 +15,6 @@ describe('docker-commands', () => {
     let cmds;
     let consoles;
     let _error;
-
     beforeEach(() => {
 
         _error = null;
@@ -42,7 +41,15 @@ describe('docker-commands', () => {
 
     describe("start-dynamo", () => {
 
-        let startDynamo = () => StartDynamo(InitializationType.SharedDb);
+        let _options;
+        let startDynamo = () => StartDynamo(_options);
+
+        beforeEach(() => {
+
+            _options = {
+                InitializationType: InitializationType.SharedDb
+            };
+        });
 
         it("on error, rejects the promise", done => {
 
@@ -72,7 +79,18 @@ describe('docker-commands', () => {
 
             startDynamo()
                 .then(() => {
-                    expect(cmds[1]).to.equal("docker run -d -p 8000:8000 chagedorn/initialize-local-dynamo -sharedDb")
+                    expect(cmds[1]).to.equal("docker run -d -p 8000:8000 chagedorn/initialize-local-dynamo -port 8000 -sharedDb")
+                    done();
+                });
+        });
+
+        it("given a port as an option, starts it on that port", done => {
+
+            _options.port = 443;
+
+            startDynamo()
+                .then(() => {
+                    expect(cmds[1]).to.equal("docker run -d -p 443:443 chagedorn/initialize-local-dynamo -port 443 -sharedDb")
                     done();
                 });
         });

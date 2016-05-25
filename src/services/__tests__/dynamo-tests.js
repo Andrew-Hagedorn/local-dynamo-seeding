@@ -125,7 +125,7 @@ describe('dynamo', () => {
         let initializeData = () => getDynamoDb().initializeData(_definition);
     });
 
-    let getDynamoDb = () => new DynamoDb();
+    let getDynamoDb = () => new DynamoDb(8000);
     
     let givenError = () => {
         _error = { message: "errored"}
