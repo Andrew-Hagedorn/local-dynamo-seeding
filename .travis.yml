@@ -25,6 +25,7 @@ script:
   - npm run test:integration
   - node ./integration-tests/saver.js
 deploy:
+  skip_cleanup: true
   provider: npm
   email: $NPM_EMAIL
   api_key: $NPM_AUTH_TOKEN
