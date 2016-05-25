@@ -16,7 +16,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && babel src --ignore=*/__tests__/* --out-dir=dist",
     "test": "mocha --compilers js:babel-register src/**/__tests__/**/*.js",
-    "prepublish": "npm run build",
+    "prepublish": "npm install --ignore-scripts && npm run build",
     "test:integration": "mocha --compilers js:babel-register integration-tests/integration-tests.js"
   },
   "dependencies": {
