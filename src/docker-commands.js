@@ -23,14 +23,28 @@ let runCommand = (args, secure) => {
     });
 };
 
-export function StartDynamo(initType) {
+export function StartDynamo(options) {
 
     return runCommand(["pull", "chagedorn/initialize-local-dynamo"])
         .then(() => {
-        let args = ["run", "-d", "-p", "8000:8000", "chagedorn/initialize-local-dynamo"];
-        if(initType === InitializationType.SharedDb) {
+        let port = 8000;
+
+        if(options.port) {
+            port = options.port;
+        }
+
+        let args = [
+            "run",
+            "-d",
+            "-p",
+            port + ":" + port,
+            "chagedorn/initialize-local-dynamo",
+            "-port", port];
+
+            if(options.InitializationType === InitializationType.SharedDb) {
             args.push("-sharedDb");
         }
+
         return runCommand(args);
     });
 };

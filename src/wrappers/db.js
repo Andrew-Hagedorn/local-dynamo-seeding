@@ -1,7 +1,7 @@
 const aws = require('aws-sdk');
 
-const getEndpoint = () => {
-    return new aws.Endpoint('http://localhost:8000');
+const getEndpoint = (port) => {
+    return new aws.Endpoint('http://localhost:' + port);
 };
 
 const initConfig = () => {
@@ -12,15 +12,18 @@ const initConfig = () => {
     });
 };
 
-
 export default class Db {
+
+    constructor(port) {
+        this.port = port;
+    }
 
     createTable(params, callback) {
 
         initConfig();
 
         var dynamo = new aws.DynamoDB({
-            endpoint: getEndpoint()
+            endpoint: getEndpoint(this.port)
         });
 
         return dynamo.createTable(params, callback);
@@ -31,7 +34,7 @@ export default class Db {
         initConfig();
 
         var docClient = new aws.DynamoDB.DocumentClient({
-            endpoint: getEndpoint()
+            endpoint: getEndpoint(this.port)
         });
 
         return docClient.put(update, callback);

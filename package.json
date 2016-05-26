@@ -1,6 +1,6 @@
 {
   "name": "initialize-local-dynamo",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "repository": "https://github.com/Andrew-Hagedorn/local-dynamo-seeding",
   "description": "Script to create docker image with a local version of dynamo pre-seeded with data for testing.",
   "main": "./dist/index.js",
