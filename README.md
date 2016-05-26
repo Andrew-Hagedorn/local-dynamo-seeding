@@ -8,7 +8,10 @@ Start Dynamo
 Pulls an empty copy of a local DynamoDb docker container and starts it.
 
 ```js
-index.StartDynamo(index.InitializationType.SharedDb)
+index.StartDynamo({
+    InitializationType: index.InitializationType.SharedDb),
+    port: 8000
+})
 ```
 
 SeedDynamo
@@ -50,7 +53,10 @@ var tableDirectory = __dirname + '/tables';
 var repository = "chagedorn/initialize-local-dynamo";
 var tag = "test";
 
-seeding.StartDynamo(seeding.InitializationType.SharedDb)
+seeding.StartDynamo({
+      InitializationType: index.InitializationType.SharedDb),
+      port: 8000
+  })
   .then(function() {
       return seeding.SeedDynamo(tableDirectory);
   })
