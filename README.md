@@ -28,8 +28,10 @@ Each file should contain the definition for a single table and export two variab
   * `updates` - an array of data points for the table
 
 
-The format for [table_params]() and [updates]() objects are the same as for performing actions
-via the [NodeJS AWS SDK]().  An example of this can be found in the [integration tests]().
+The format for [table_params](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html#createTable-property)
+ and [updates](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property) objects are the same as for performing actions
+via the [NodeJS AWS SDK](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html).  An example of this can be found in the
+[integration tests](https://github.com/Andrew-Hagedorn/local-dynamo-seeding/blob/master/integration-tests/tables/table1.js).
 
 
 SaveChanges
